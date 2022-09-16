@@ -4,23 +4,45 @@ using the first two letters of the string."""
 
 class HashTable(object):
     def __init__(self):
-        self.table = [None]*10000
+        self.table = [[None]]*10000
 
     def store(self, string):
         """Input a string that's stored in 
         the table."""
-        pass
+        hash_value = self.calculate_hash_value(string)
+        hash = hash_value % 10000
+        try:
+            self.table[hash].append(string)
+            return
+        except:
+            print("something went wrong while storing")
+            return
 
     def lookup(self, string):
         """Return the hash value if the
         string is already in the table.
         Return -1 otherwise."""
-        return -1
+        available = False
+        hash_value = self.calculate_hash_value(string)
+        hash = hash_value % 10000
+        for values in self.table[hash]:
+            if values == string:
+                available = True
+                break
+        
+        if available == True:
+            return hash
+        else:
+            return -1
 
     def calculate_hash_value(self, string):
         """Helper function to calulate a
         hash value from a string."""
-        return -1
+        if not (len(string) > 2):
+            print("string length not sufficent")
+            return -1
+        hash_value = (ord(string[0])*100) + (ord(string[1]))
+        return hash_value
     
 # Setup
 hash_table = HashTable()
