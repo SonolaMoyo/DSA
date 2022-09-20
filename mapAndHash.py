@@ -18,7 +18,7 @@ class HashTable(object):
             print("something went wrong while storing")
             return
 
-    def lookup(self, string):
+    def lookup(self, string): 
         """Return the hash value if the
         string is already in the table.
         Return -1 otherwise."""
